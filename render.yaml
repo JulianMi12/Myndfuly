@@ -1,0 +1,38 @@
+# render.yaml
+
+services:
+  - type: web
+    name: myndfuly
+    env: java
+    plan: free
+    buildCommand: "./mvnw clean install -DskipTests"
+    startCommand: "java -jar target/myndfuly-0.0.1-SNAPSHOT.jar"
+    envVars:
+      - key: JAVA_VERSION
+        value: 17
+
+      # === Propiedades de la base de datos ===
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:postgresql://ep-silent-cherry-aeh7pcvt-pooler.c-2.us-east-2.aws.neon.tech:5432/myndfuly
+      - key: SPRING_DATASOURCE_USERNAME
+        value: neondb_owner
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: npg_0qiZ3HdkUseS
+      - key: SPRING_DATASOURCE_DRIVER-CLASS-NAME
+        value: org.postgresql.Driver
+      - key: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
+        value: org.hibernate.dialect.PostgreSQLDialect
+      - key: SPRING_JPA_HIBERNATE_DDL-AUTO
+        value: update
+
+      # === Propiedades de la aplicación ===
+      - key: CO_COM_MYNDFULY_AES-KEY
+        value: kYp3s6v9y$B&E)H@McQfThWmZq4t7w!z
+      - key: CO_COM_MYNDFULY_SCHEDULE_BIRTHDAY
+        value: 0 0 3 * * *
+
+      # === Propiedades de autenticación (JWT) ===
+      - key: JWT_SECRET-KEY
+        value: T1YkHGnOr+sH6H1tX/vqrpSrXeIS/tBxtOUKraY066Q=
+      - key: JWT_EXPIRATION-TIME
+        value: 7200000
